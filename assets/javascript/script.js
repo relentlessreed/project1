@@ -1,6 +1,30 @@
 // PART ONE
 //------------------------------------------------------------------------------------
 // 1. Get API's.
+// Fetch Edamam API Call
+var APP_ID = "3a299119";
+var APP_KEY = "6a46b3e002c78827692dab761f78027c";
+// make query dynamic
+var url = `https://api.edamam.com/search?q=chicken&app_id=${APP_ID}&app_key=${APP_KEY}`;
+fetch(url)
+  .then(function (res) {
+    return res.json();
+  })
+  .then(function (data) {
+    console.log("data :>> ", data);
+  });
+
+// Fetch Spoonacular API Call
+var API_KEY = "b18180e37fa14d5da507e6e986a1a055";
+
+var url = `https://api.spoonacular.com/recipes/716429/information?apiKey=${API_KEY}&includeNutrition=true`;
+fetch(url)
+  .then(function (res) {
+    return res.json();
+  })
+  .then(function (data) {
+    console.log("data :>> ", data);
+  });
 
 // 1a. Perform Seperate Fetches
 
