@@ -16,6 +16,12 @@ fetch(url)
     console.log("data :>> ", data);
   });
 
+// click event listener
+$("#nextBtn").click(function () {
+  console.log("Next button clicked");
+  getData();
+});
+
 // Fetch Spoonacular API Call
 var API_KEY = "b18180e37fa14d5da507e6e986a1a055";
 //api.spoonacular.com/recipes/random?number=1&tags=vegetarian,dessert
@@ -28,7 +34,10 @@ fetch(url)
     console.log("data :>> ", data);
   });
 
-  // Function to get user input data
+function getData() {
+  console.log(peanutAllergy.value());
+}
+// Function to get user input data
 var peanutAllergy = $("peanutAllergy");
 var seafoodAllergy = $("seafoodAllergy");
 var dairyAllergy = $("dairyAllergy");
@@ -36,6 +45,12 @@ var gluten = $("gluten");
 var vegan = $("vegan");
 var kosher = $("kosher");
 var vegan = $("vegan");
+
+// Combining API Data
+var apiData1 = []; // gonna be filed with api data from the first api
+var apiData2 = []; // gonna be filled with data from the second api
+var combinedData = apiData1.concat(apidata2); // this will be a combination of literally everything FILTER THIS!! RANDOMIZE THIS!!
+
 // 1a. Perform Seperate Fetches
 
 // 2. Create Variables. (One for each Allergy, One for Each Diet Restriction)
