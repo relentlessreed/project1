@@ -19,9 +19,15 @@ fetch(url)
 // click event listener
 $("#nextBtn").click(function () {
   console.log("Next button clicked");
-  getData();
+  var tags = [];
+  $("input:checked").each(function () {
+    tags.push($(this).val());
+  });
+  console.log(tags.join(","));
+  //getData();
 });
 
+//IF NOTHING IS CLICKED SEARCH THIS API
 // Fetch Spoonacular API Call
 var API_KEY = "b18180e37fa14d5da507e6e986a1a055";
 //api.spoonacular.com/recipes/random?number=1&tags=vegetarian,dessert
@@ -37,6 +43,7 @@ fetch(url)
 function getData() {
   console.log(peanutAllergy.value());
 }
+/*
 // Function to get user input data
 var peanutAllergy = $("peanutAllergy");
 var seafoodAllergy = $("seafoodAllergy");
@@ -45,6 +52,7 @@ var gluten = $("gluten");
 var vegan = $("vegan");
 var kosher = $("kosher");
 var vegan = $("vegan");
+*/
 
 // Combining API Data
 var apiData1 = []; // gonna be filed with api data from the first api
