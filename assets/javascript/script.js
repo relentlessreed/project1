@@ -28,6 +28,14 @@ fetch(url)
     console.log("data :>> ", data);
   });
 
+  // Function to get user input data
+var peanutAllergy = $("peanutAllergy");
+var seafoodAllergy = $("seafoodAllergy");
+var dairyAllergy = $("dairyAllergy");
+var gluten = $("gluten");
+var vegan = $("vegan");
+var kosher = $("kosher");
+var vegan = $("vegan");
 // 1a. Perform Seperate Fetches
 
 // 2. Create Variables. (One for each Allergy, One for Each Diet Restriction)
