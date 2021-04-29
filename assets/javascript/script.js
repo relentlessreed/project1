@@ -119,6 +119,10 @@ function call_recipes() {
         }
       }
       $("#image").attr("src", recipe.image);
+      $("#title").text(recipe.title);
+      // THIS LINE IS WHAT NEEDS FIXING
+      $("#steps").text(`data.results.[0].analyzedInstructions.steps`);
+      // $("#title").attr(recipe.title);
       console.log(recipe);
     });
 
