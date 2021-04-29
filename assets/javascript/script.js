@@ -7,7 +7,7 @@ var APP_ID = "3a299119";
 var APP_KEY = "6a46b3e002c78827692dab761f78027c";
 // make query dynamic
 
-var url = `https://api.edamam.com/search?q=undefined&app_id=${APP_ID}&app_key=${APP_KEY}&from=0&to=10`;
+var url = `https://api.edamam.com/search?q=undefined&app_id=${APP_ID}&app_key=${APP_KEY}&from=1&to=2`;
 fetch(url)
   .then(function (res) {
     return res.json();
