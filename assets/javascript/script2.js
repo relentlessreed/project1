@@ -2,10 +2,10 @@
 var tag_filters = "";
 var ingredients_filters = "";
 var btn_next = $("#nextBtn"); // <----- Rename "#getRecipeBtn"
-/*Alright so the idea is that when our page loads we check for recipes saved inside of localStorage under the key 'previousRecipes'
-If it doesnt exist we set previousRecipes to an empty array.
-Should look pretty familiar to some of the homework stuff.
-Then in our api call that we make to spoonacular is where we are going to want to save the data into local storage.*/
+
+// On Page load, we check for recipes saved inside of localStorage under the key 'previousRecipes'
+// If 'previousRecipes' doesn't exist, we set that to an empty array.
+// Then in our api call that we make to spoonacular is where we are going to want to save the data into local storage. (Lines 84-124)
 var previousRecipes = JSON.parse(localStorage.getItem("previousRecipes")) || [];
 
 $("#nextBtn").click(function (e) {
@@ -110,6 +110,34 @@ function call_Spoonacular(tags) {
       document.querySelector("#steps").innerHTML = makeStepsElement(
         recipe.steps
       );
+
+      $("#previouslySearched").text(recipe.title);
+      $("#previouslySearched").text(recipe.sourceUrl);
+      console.log(r);
+
+      previousRecipes.push({
+        title: r.title,
+        sourceUrl: r.sourceUrl,
+      });
+      $(`<a href="${recipe.sourceUrl}"> ${recipe.title}<a/>`).appendTo("#previouslySearched");
+      // Clear Local Storage on Button Click
+      $("#clearBtn").click(function (e) {
+        localStorage.clear();
+        //removes any children within parent
+        $("#previouslySearched").empty();
+      });
+
+      localStorage.setItem("previousRecipes", JSON.stringify(previousRecipes));
+      /*At the end of our spoonacular api call we could do something like this.
+      We grab a bunch of information(WE ONLY NEED THE URL) on the recipe and whatever we want to store we push it into previousRecipes
+      Then we make sure to save localStorage afterwards.
+      If everything goes well you should be left with an array where each element in that array is a different recipe.
+      This should get your data into the right place. After that is just a matter of writing the code that uses the data to append the cards.
+      Its all pretty similar to the high scores part of the javascript quiz homework*/
+
+      /* • Module 3.5.8: Save and Load the High Score
+     This will have the relevant information for working with local storage.*/
+
       // Toggles modal off when user clicks "Get Recipe"
       $("#myModal").modal("toggle");
     });
