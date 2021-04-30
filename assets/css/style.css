@@ -1,0 +1,12 @@
+#recipeDiv {
+  display: flex;
+  width: auto;
+  justify-content: center;
+  align-items: center;
+}
+.modal-content {
+  text-align: center;
+}
+#background-image {
+  display: flex;
+}
