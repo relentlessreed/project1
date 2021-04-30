@@ -8,6 +8,24 @@ var btn_next = $("#nextBtn"); // <----- Rename "#getRecipeBtn"
 // Then in our api call that we make to spoonacular is where we are going to want to save the data into local storage. (Lines 84-124)
 var previousRecipes = JSON.parse(localStorage.getItem("previousRecipes")) || [];
 
+// For loop
+function getPreviousRecipeUrls(data) {
+  for (i = 0; i < 5; i++) {
+    $(`#card${i + 1}`).empty();
+    $(`#card${i + 1}`).append(`<div id="appendedCard${i}"></div>`);
+    var fiveDayDiv = $(`#appendedCard${i}`);
+    fiveDayDiv.append(
+      `<h3>${dayjs.unix(data.daily[i].dt).format("dddd MM/DD/YYYY")}</h3>`
+    );
+    fiveDayDiv.append(
+      `<img src="http://openweathermap.org/img/wn/${data.daily[i].weather[0].icon}.png" alt="${data.daily[i].weather[0].description}">`
+    );
+    fiveDayDiv.append(`<p>Temperature: ${data.daily[i].temp.max}</p>`);
+    fiveDayDiv.append(`<p>Wind Speed: ${data.daily[i].wind_speed}</p>`);
+    fiveDayDiv.append(`<p>Humidity: ${data.daily[i].humidity}</p>`);
+  }
+}
+
 $("#nextBtn").click(function (e) {
   // Prevents the form from triggering its default behavior
   e.preventDefault();
@@ -119,7 +137,9 @@ function call_Spoonacular(tags) {
         title: r.title,
         sourceUrl: r.sourceUrl,
       });
-      $(`<a href="${recipe.sourceUrl}"> ${recipe.title}<a/>`).appendTo("#previouslySearched");
+      $(`<a href="${recipe.sourceUrl}"> ${recipe.title}<a/>`).appendTo(
+        "#previouslySearched"
+      );
       // Clear Local Storage on Button Click
       $("#clearBtn").click(function (e) {
         localStorage.clear();

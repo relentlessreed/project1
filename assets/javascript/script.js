@@ -114,7 +114,7 @@ function call_Spoonacular(tags) {
       $("#myModal").modal("toggle");
     });
 }
-
+function getPreviousRecipes = 
 // Appending random Spoonacular recipe steps to DOM
 function makeStepsElement(steps) {
   let _steps = steps.map((step_item) => {
