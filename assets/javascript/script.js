@@ -58,7 +58,7 @@ function call_Edamam() {
       var recipe = {
         title: r.label,
         hasRecipe: false,
-        link: r.url,
+        link: r.shareAs,
         image: r.image,
       };
 
