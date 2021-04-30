@@ -32,7 +32,7 @@ $("#nextBtn").click(function (e) {
     call_Edamam();
     console.log("Edamam Api Call Needed");
   } else {
-    call_Spoonacular();
+    call_Spoonacular(tag_filters);
   }
 });
 
@@ -74,21 +74,12 @@ function call_Edamam() {
     });
 }
 
-function call_Spoonacular() {
+function call_Spoonacular(tags) {
   var API_KEY = "b18180e37fa14d5da507e6e986a1a055";
-  var url1 = `https://api.spoonacular.com/recipes/complexSearch?&tags=`;
-  var tags = [];
-  var randomNumber = Math.floor(Math.random() * 100 + 1);
-  var ingredients =
-    "&intolerances=" + ingredients_filters + "&diet=" + ingredients_filters;
-  var url2 = `&addRecipeInformation=true&number=1&offset=${randomNumber}&instructionsRequired=true&apiKey=${API_KEY}`;
-
-  var results = url1 + tags + ingredients + url2;
-  console.log(results);
+  var url = `https://api.spoonacular.com/recipes/random?apiKey=${API_KEY}&number=1&tags=${tags}`;
   // https: var url = `https://api.spoonacular.com/recipes/random?number=10&apiKey=${API_KEY}&from=0&to=10`;
   // https: var url = results;
 
-  var url = results;
   fetch(url)
     .then(function (res) {
       return res.json();
@@ -99,7 +90,8 @@ function call_Spoonacular() {
       return data;
     })
     .then(function (data) {
-      var r = data.results[0];
+      var r = data.recipes[0];
+      console.log(data);
       var recipe = {
         title: r.title,
         hasRecipe: true,
