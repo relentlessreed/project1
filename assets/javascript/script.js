@@ -2,11 +2,29 @@
 var tag_filters = "";
 var ingredients_filters = "";
 var btn_next = $("#nextBtn"); // <----- Rename "#getRecipeBtn"
-/*Alright so the idea is that when our page loads we check for recipes saved inside of localStorage under the key 'previousRecipes'
-If it doesnt exist we set previousRecipes to an empty array.
-Should look pretty familiar to some of the homework stuff.
-Then in our api call that we make to spoonacular is where we are going to want to save the data into local storage.*/
+
+// On Page load, we check for recipes saved inside of localStorage under the key 'previousRecipes'
+// If 'previousRecipes' doesn't exist, we set that to an empty array.
+// Then in our api call that we make to spoonacular is where we are going to want to save the data into local storage. (Lines 84-124)
 var previousRecipes = JSON.parse(localStorage.getItem("previousRecipes")) || [];
+
+// For loop
+function getPreviousRecipeUrls(data) {
+  for (i = 0; i < 5; i++) {
+    $(`#card${i + 1}`).empty();
+    $(`#card${i + 1}`).append(`<div id="appendedCard${i}"></div>`);
+    var fiveDayDiv = $(`#appendedCard${i}`);
+    fiveDayDiv.append(
+      `<h3>${dayjs.unix(data.daily[i].dt).format("dddd MM/DD/YYYY")}</h3>`
+    );
+    fiveDayDiv.append(
+      `<img src="http://openweathermap.org/img/wn/${data.daily[i].weather[0].icon}.png" alt="${data.daily[i].weather[0].description}">`
+    );
+    fiveDayDiv.append(`<p>Temperature: ${data.daily[i].temp.max}</p>`);
+    fiveDayDiv.append(`<p>Wind Speed: ${data.daily[i].wind_speed}</p>`);
+    fiveDayDiv.append(`<p>Humidity: ${data.daily[i].humidity}</p>`);
+  }
+}
 
 $("#nextBtn").click(function (e) {
   // Prevents the form from triggering its default behavior
@@ -80,7 +98,7 @@ function call_Edamam() {
 }
 
 function call_Spoonacular(tags) {
-  var API_KEY = "b18180e37fa14d5da507e6e986a1a055";
+  var API_KEY = "3461b5eaec8740babb6ea8db7ec41d11";
   var url = `https://api.spoonacular.com/recipes/random?apiKey=${API_KEY}&number=1&tags=${tags}`;
 
   fetch(url)
@@ -110,11 +128,31 @@ function call_Spoonacular(tags) {
       document.querySelector("#steps").innerHTML = makeStepsElement(
         recipe.steps
       );
-      // Toggles modal off when user clicks "Get Recipe"
+
+      $("#previouslySearched").text(recipe.title);
+      $("#previouslySearched").text(recipe.sourceUrl);
+      console.log(r);
+
+      previousRecipes.push({
+        title: r.title,
+        sourceUrl: r.sourceUrl,
+      });
+      $(`<a href="${r.sourceUrl}"> ${recipe.title}<a/>`).appendTo(
+        "#previouslySearched"
+      );
+      // Clear Local Storage on Button Click
+      $("#clearBtn").click(function (e) {
+        localStorage.clear();
+        //removes any children within parent
+        $("#previouslySearched").empty();
+      });
+
+      localStorage.setItem("previousRecipes", JSON.stringify(previousRecipes));
+
       $("#myModal").modal("toggle");
     });
 }
-function getPreviousRecipes = 
+
 // Appending random Spoonacular recipe steps to DOM
 function makeStepsElement(steps) {
   let _steps = steps.map((step_item) => {
@@ -124,29 +162,3 @@ function makeStepsElement(steps) {
   _steps = `<ul>${_steps.join("")}</ul>`;
   return _steps;
 }
-
-// ICE BOX
-//var history = localStorage.getItem('');
-
-// Saving previous recipes to Local Storage
-localStorage.setItem();
-
-/*Appending data to a localStorage() array #
-If you’re storing collections of data, it might make more sense to use an array.
-Similar to the example above, we’ll first check to see if the item already exists. 
-localStorage() only stores string values. If there’s already saved data, we’ll convert it to an array. 
-Otherwise, we’ll create one.
-Then, we’ll push our new value to the array and save it back to localStorage(), running it through toString() to convert it back to a string.*/
-
-// Get the existing data
-var existing = localStorage.getItem("myFavoriteSandwich");
-
-// If no existing data, create an array
-// Otherwise, convert the localStorage string to an array
-existing = existing ? existing.split(",") : [];
-
-// Add new data to localStorage Array
-existing.push("tuna");
-
-// Save back to localStorage
-localStorage.setItem("myFavoriteSandwich", existing.toString());
