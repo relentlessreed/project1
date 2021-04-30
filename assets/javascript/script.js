@@ -77,8 +77,6 @@ function call_Edamam() {
 function call_Spoonacular(tags) {
   var API_KEY = "b18180e37fa14d5da507e6e986a1a055";
   var url = `https://api.spoonacular.com/recipes/random?apiKey=${API_KEY}&number=1&tags=${tags}`;
-  // https: var url = `https://api.spoonacular.com/recipes/random?number=10&apiKey=${API_KEY}&from=0&to=10`;
-  // https: var url = results;
 
   fetch(url)
     .then(function (res) {
@@ -98,9 +96,33 @@ function call_Spoonacular(tags) {
         steps: r.analyzedInstructions[0].steps,
         image: r.image,
       };
+      // Appending random Spoonacular recipe Image and Title to DOM
+      $("#image").attr("src", recipe.image);
+      $("#image").attr("alt", recipe.title);
+      $("#title").text(recipe.title);
+      console.log(data);
+      // Giving recipe steps text a place to go
+      document.querySelector("#steps").innerHTML = makeStepsElement(
+        recipe.steps
+      );
+      // Toggles modal off when user clicks "Get Recipe"
+      $("#myModal").modal("toggle");
+    });
+}
 
-      // Saving previous recipes to Local Storage
-      /*localStorage.setItem()
+// Appending random Spoonacular recipe steps to DOM
+function makeStepsElement(steps) {
+  let _steps = steps.map((step_item) => {
+    return `<li>Step ${step_item.number}: ${step_item.step}</li>`;
+  });
+
+  _steps = `<ul>${_steps.join("")}</ul>`;
+  return _steps;
+}
+
+// ICE BOX
+// Saving previous recipes to Local Storage
+/*localStorage.setItem()
 Appending data to a localStorage() array #
 If you’re storing collections of data, it might make more sense to use an array.
 Similar to the example above, we’ll first check to see if the item already exists. 
@@ -119,27 +141,3 @@ existing.push('tuna');
 
 // Save back to localStorage
 localStorage.setItem('myFavoriteSandwich', existing.toString());*/
-
-      // Appending random Spoonacular recipe Image and Title to Dom
-      $("#image").attr("src", recipe.image);
-      $("#image").attr("alt", recipe.title);
-      $("#title").text(recipe.title);
-      console.log(data);
-      // $("#steps").text(`${data.results[0].analyzedInstructions.steps}`);
-      document.querySelector("#steps").innerHTML = makeStepsElement(
-        recipe.steps
-      );
-      // Toggles modal off when user clicks "Get Recipe"
-      $("#myModal").modal("toggle");
-    });
-}
-
-// Appending random Spoonacular recipe steps to DOM
-function makeStepsElement(steps) {
-  let _steps = steps.map((step_item) => {
-    return `<li>Step ${step_item.number}:- ${step_item.step}</li>`;
-  });
-
-  _steps = `<ul>${_steps.join("")}</ul>`;
-  return _steps;
-}
