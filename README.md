@@ -6,7 +6,7 @@ With your team, you will conceive and execute a design that solves a real-world 
 
 # Project Name: What Can I Eat Without Dying?
 
-![Screenshot](demo.gif)
+![Screenshot](./images/demo.gif)
 
 # Overview
 
@@ -16,16 +16,16 @@ As we tried to think about a real life problem in class. We realized we were hav
 
 - click here to open the project [Link to our application](https://relentlessreed.github.io/project1/)
 - You you open the project the first thing that will great you is a prompt to begin. To start click the "Show me a recipe I can cook that won't kill me."
-  ![Screenshot](mainscreen.png)
+  ![Screenshot](./images/mainscreen.png)
 - Next you will see a modal that will ask you to choose any allergies or diets you have.
-  ![Screenshot](picking.png)
+  ![Screenshot](./images/picking.png)
 - But what if I do not have any?...Easy you just click on the get the recipes button.
 - The next thing that should appear is a recipe for dinner!
   - You should see an image of a prepared meal.
   - The name of the meal
   - Instructions on how to cook it
   - And finally a link for even more details
-    ![Screenshot](fullrecipe.png)
+    ![Screenshot](./images/fullrecipe.png)
 - You will notice that the meals given to you follow your restriction requests.
 
 # Contributors
