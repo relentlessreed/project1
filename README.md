@@ -30,6 +30,8 @@ As we tried to think about a real life problem in class. We realized we were hav
 
 # Contributors
 
-@relentlessreed
-@Jose8160
-@GrantShell
+[relentlessreed@gmail.com](mailto:relentlessreed@gmail.com?subject=GitHub)
+<br>
+[jose816orozco@gmail.com](mailto:jose816orozco@gmail.com?subject=GitHub)
+<br>
+[grantshell33@yahoo.com](mailto:grantshell33@yahoo.com?subject=GitHub)
