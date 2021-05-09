@@ -28,6 +28,14 @@ As we tried to think about a real life problem in class. We realized we were hav
     ![Screenshot](./images/fullrecipe.png)
 - You will notice that the meals given to you follow your restriction requests.
 
+Technologies Used:
+
+- HTML
+- CSS
+- Bootstrap
+- JQuery
+- JavaScript
+
 # Contributors
 
 [relentlessreed@gmail.com](mailto:relentlessreed@gmail.com?subject=GitHub)
